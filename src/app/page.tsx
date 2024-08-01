@@ -17,7 +17,9 @@ export default function Home() {
     };
 
     try {
-      await axios.post(apiUrl, payload, { withCredentials: true }); 
+      console.log(process.env);
+      console.log(process.env.API_BASE_URL_ENV)
+      await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/auth/login`, payload, { withCredentials: true }); 
       push("/dashboard"); 
     } catch (error) {
       if (axios.isAxiosError(error)) {

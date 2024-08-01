@@ -11,7 +11,7 @@ const useAuth = () => {
       console.log('Checking authentication');
 
       try {
-        const response = await fetch('http://localhost:8080/api/auth/check', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/auth/check`, {
           method: 'GET',
           credentials: 'include', 
         });
