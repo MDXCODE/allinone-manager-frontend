@@ -1,0 +1,55 @@
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+const useAuth = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log('useAuth hook executed');
+
+    const checkAuth = async () => {
+      console.log('Checking authentication');
+
+      try {
+        const response = await fetch('http://localhost:8080/api/auth/check', {
+          method: 'GET',
+          credentials: 'include', 
+        });
+
+        console.log('Response status:', response.status);
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Response data:', data);
+
+
+          if (data.status === 'ok' && data.decoded) {
+            console.log('User authenticated');
+          } else {
+            console.log('Token is null or invalid, redirecting...');
+            router.push('/');
+          }
+        } else {
+          console.log('Response not OK (status: ' + response.status + '), redirecting...');
+          router.push('/');
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+        router.push('/');
+      }
+    };
+
+    checkAuth();
+
+    const intervalId = setInterval(checkAuth, 10000);
+
+    return () => {
+      console.log('Cleaning up interval');
+      clearInterval(intervalId);
+    };
+  }, [router]);
+
+  return null; 
+};
+
+export default useAuth;
