@@ -18,17 +18,8 @@ const useAuth = () => {
 
         console.log('Response status:', response.status);
 
-        if (response.ok) {
-          const data = await response.json();
-          console.log('Response data:', data);
-
-
-          if (data.status === 'ok' && data.decoded) {
-            console.log('User authenticated');
-          } else {
-            console.log('Token is null or invalid, redirecting...');
-            router.push('/');
-          }
+        if (response.status === 200) {
+          console.log('User authenticated');
         } else {
           console.log('Response not OK (status: ' + response.status + '), redirecting...');
           router.push('/');

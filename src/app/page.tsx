@@ -22,10 +22,10 @@ export default function Home() {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error('Axios error:', error.response?.data || error.message);
-        alert(`Error: ${error.response?.data?.message || error.message}`);
+        //alert(`Error: ${error.response?.data?.message || error.message}`);
       } else {
         console.error('Unexpected error:', error);
-        alert(`Unexpected error: ${error.message}`);
+        //alert(`Unexpected error: ${error.message}`);
       }
     }
   };
