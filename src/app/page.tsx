@@ -1,34 +1,23 @@
-"use client";
+// allinone-manager-frontend/src/app/page.tsx
+'use client';
 
-import { useRouter } from "next/navigation";
-import axios, { AxiosError } from "axios";
+import { useRouter } from 'next/navigation';
+import { useAuth } from '../context/authProvider';
 
 export default function Home() {
   const { push } = useRouter();
-  
-  const apiUrl = process.env.API_BASE_URL_ENV || 'http://localhost:8080/api/auth/login';
+  const { login } = useAuth();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    const payload = {
-      user_name: event.currentTarget.username.value,
-      user_pass: event.currentTarget.password.value,
-    };
+    const username = event.currentTarget.username.value;
+    const password = event.currentTarget.password.value;
 
     try {
-      console.log(process.env);
-      console.log(process.env.API_BASE_URL_ENV)
-      await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/auth/login`, payload, { withCredentials: true }); 
-      push("/dashboard"); 
+      await login(username, password);
+      push('/dashboard');
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.error('Axios error:', error.response?.data || error.message);
-        //alert(`Error: ${error.response?.data?.message || error.message}`);
-      } else {
-        console.error('Unexpected error:', error);
-        //alert(`Unexpected error: ${error.message}`);
-      }
+      console.error('Login failed:', error);
     }
   };
 
