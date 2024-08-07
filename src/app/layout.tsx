@@ -1,7 +1,7 @@
 // allinone-manager-frontend/src/app/layout.tsx
-'use client'; // Add this directive
+'use client'; 
 
-import './globals.css';
+import './css/globals.css';
 import { Inter } from 'next/font/google';
 import { AuthProvider } from '../context/authProvider';
 

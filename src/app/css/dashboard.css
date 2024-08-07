@@ -1,0 +1,24 @@
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  body.dashboard-body {
+    background-color: black;
+  }
+  
+  ul {
+    list-style: inside;
+  }
+  
+  li {
+    font-size: 20px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+  
+  li:hover {
+    scale: 1.02;
+  }
+  

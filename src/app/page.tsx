@@ -1,12 +1,16 @@
-// allinone-manager-frontend/src/app/page.tsx
-'use client';
+// src/app/page.tsx (login/default page)
 
-import { useRouter } from 'next/navigation';
-import { useAuth } from '../context/authProvider';
+"use client";
+
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/authProvider";
+import "./css/login.css";
 
 export default function Home() {
   const { push } = useRouter();
   const { login } = useAuth();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -15,45 +19,56 @@ export default function Home() {
 
     try {
       await login(username, password);
-      push('/dashboard');
+      push("/dashboard");
     } catch (error) {
-      console.error('Login failed:', error);
+      console.error("Login failed:", error);
+      setErrorMessage("Incorrect username or password. Please try again.");
     }
   };
 
   return (
     <main>
-      <h1>Nextjs authentication JWT verify http cookie only</h1>
-
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            required
-            className="border rounded border-black"
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            className="border rounded border-black"
-          />
+      <div className="main-box">
+        <div className="main-login-titles">
+          <h1 id="main-login-titles-h1">AllInOne</h1>
+          <h5 id="main-login-titles-h5">The Only Task Manager You Need</h5>
         </div>
 
-        <button
-          type="submit"
-          className="p-2 bg-orange-600 text-white w-fit rounded"
-        >
-          Submit
-        </button>
-      </form>
+        <form onSubmit={handleSubmit} className="main-login-input">
+          <div className="username-login">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              required
+              className="border rounded border-black"
+              placeholder="username"
+            />
+          </div>
+
+          <div className="password-login">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              className="border rounded border-black"
+              placeholder="password"
+            />
+          </div>
+
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+          <p className="forgot-pass">Forgot Password?</p>
+          
+          <div className="button-container">
+            <button type="submit" className="login-button">
+              Log In
+            </button>
+          </div>
+
+        </form>
+      </div>
     </main>
   );
 }

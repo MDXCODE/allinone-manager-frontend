@@ -1,4 +1,6 @@
-'use client';
+// src/context/authProvider.tsx
+
+"use client";
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -30,7 +32,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchUserData = async () => {
     try {
-      console.log('Fetching user data');
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/users/details`, {
         method: 'GET',
         credentials: 'include',
@@ -39,10 +40,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (res.ok) {
         const data = await res.json();
         setUser(data.data);
-        console.log('User data fetched:', data.data);
         if (!authenticatedOnce) {
           setAuthenticatedOnce(true);
-          console.log('User is authorized:', data.data); // Log once when user is first authenticated
         }
       } else {
         const errorText = await res.text();
@@ -59,16 +58,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (username: string, password: string) => {
     try {
-      console.log('Attempting login');
-      await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/auth/login`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_name: username, user_pass: password }),
         credentials: 'include',
       });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Login failed: ${errorText}`);
+      }
+
       await fetchUserData();
     } catch (error) {
-      setError(`Login error: ${error}`);
+      if (error instanceof Error) {
+        setError(`Login error: ${error.message}`);
+        throw error; 
+      }
     }
   };
 
@@ -81,41 +88,35 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           'Content-Type': 'application/json',
         },
       });
-  
+
       if (!response.ok) {
         throw new Error(`Logout failed with status: ${response.status}`);
       }
-  
-      console.log('Logout successful');
-    } catch (error) {
-      console.error('Logout error:', error);
-      setError(`Logout error: ${error.message}`);
+
+      setUser(null);
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(`Logout error: ${e.message}`);
+      } else {
+        setError('Unknown error during logout');
+      }
     }
   };
-  
-  const getTokenFromStorage = () => {
-    return localStorage.getItem('authToken') || '';
-  };
-  
+
   useEffect(() => {
     const checkAuth = async () => {
-      console.log('Checking authentication');
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/auth/check`, {
           method: 'GET',
           credentials: 'include',
         });
 
-        console.log('Response status:', response.status);
-
         if (response.status === 200) {
-          await fetchUserData(); // Ensure user data is fetched and updated
+          await fetchUserData(); 
         } else {
-          console.log('Response not OK (status: ' + response.status + '), redirecting...');
           router.push('/');
         }
       } catch (error) {
-        console.error('Fetch error:', error);
         router.push('/');
       }
     };

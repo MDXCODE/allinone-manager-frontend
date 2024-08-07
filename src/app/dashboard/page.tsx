@@ -1,15 +1,24 @@
+// src/app/dashboard/page.tsx
+
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../context/authProvider';
+import "../css/dashboard.css";
 
 const Dashboard = () => {
   const { user, loading, error, logout } = useAuth();
   const router = useRouter();
+  const reloadCount = Number(sessionStorage.getItem('reloadCount')) || 0;
 
   useEffect(() => {
-    // If needed, check authentication status or fetch user data here
+    if(reloadCount < 2) {
+      sessionStorage.setItem('reloadCount', String(reloadCount + 1));
+      window.location.reload();
+    } else {
+      sessionStorage.removeItem('reloadCount');
+    }
   }, []);
 
   if (loading) return <div>Loading...</div>;
@@ -19,7 +28,7 @@ const Dashboard = () => {
   const handleLogout = async () => {
     try {
       await logout();
-      router.push('/'); // Ensure the user is redirected after logout
+      router.push('/'); 
     } catch (err) {
       console.error('Logout failed:', err);
     }
