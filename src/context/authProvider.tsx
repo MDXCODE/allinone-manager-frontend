@@ -1,5 +1,3 @@
-// src/context/authProvider.tsx
-
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
@@ -19,6 +17,7 @@ interface AuthContextType {
   error: string | null;
   login: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  signup: (username: string, email: string, password: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -40,17 +39,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (res.ok) {
         const data = await res.json();
         setUser(data.data);
+        //console.log('User data fetched:', data.data);
         if (!authenticatedOnce) {
           setAuthenticatedOnce(true);
+          console.log('User is authorized:', data.data);
         }
       } else {
         const errorText = await res.text();
         setError(`Failed to fetch user details: ${errorText}`);
-        router.push('/');
+        if (window.location.pathname !== '/signup') {
+         router.push('/');
+        }
       }
     } catch (error) {
       setError(`Error fetching user data: ${error}`);
-      router.push('/');
+      if (window.location.pathname !== '/signup') {
+        router.push('/');
+      }
     } finally {
       setLoading(false);
     }
@@ -77,6 +82,29 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         throw error; 
       }
     }
+  };
+
+  const signup = async (username: string, email: string, password: string) => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/auth/signup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_name: username, user_email: email, user_pass: password }),
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Signup failed: ${errorText}`);
+      } 
+
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(`Signup error: ${e.message}`);
+        throw error; 
+      }
+    }
+
   };
 
   const logout = async () => {
@@ -106,18 +134,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/auth/check`, {
-          method: 'GET',
-          credentials: 'include',
-        });
+        if (window.location.pathname !== '/signup' && window.location.pathname !== '/signupsuccess' ) {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/auth/check`, {
+            method: 'GET',
+            credentials: 'include',
+          });
 
-        if (response.status === 200) {
-          await fetchUserData(); 
-        } else {
-          router.push('/');
+          if (response.status === 200) {
+            await fetchUserData(); 
+          } else {
+              router.push('/');
+          }
         }
       } catch (error) {
-        router.push('/');
+          router.push('/');
       }
     };
 
@@ -128,7 +158,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [router]);
 
   return (
-    <AuthContext.Provider value={{ user, loading, error, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, error, login, logout, signup }}>
       {children}
     </AuthContext.Provider>
   );

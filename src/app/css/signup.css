@@ -45,15 +45,26 @@ button {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
-    text-align: center;
-}
-.main-login-titles {
-    color: black;
+    transform: translate(-50%, -50%);
     text-align: center;
 }
 
-.main-login-titles-h1 {
+.main-signup-titles {
+    color: black;
+    text-align: center;
+  
+}
+
+.success-message {
+  padding-top:110px;
+  font-size: 50px;
+  color: black;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 900;
+  margin-bottom: -20px;
+}
+
+.main-signup-titles-h1 {
     font-size: 70px;
     color: black;
     font-family: 'Open Sans', sans-serif;
@@ -61,10 +72,10 @@ button {
     margin-bottom: -20px;
 }
 
-.main-login-titles-h5 {
+.main-signup-titles-h5 {
     font-size: 20px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
+    font-weight: 100;
 }
 
 
@@ -79,29 +90,32 @@ input {
 }
 
 
-.main-login-input input {
+.main-signup-input input {
   height: 65px; 
   border-radius: 15px;
 }
 
 
-.main-login-input {
+.main-signup-input {
   padding-top: 50px;
   width: 500px; 
 }
 
-
-.password-login {
+.email-signup {
   padding-top: 20px;
 }
 
-.sign-up-link {
+.password-signup {
+  padding-top: 20px;
+}
+
+.login-link {
   padding-top:7px;
   float: right;
   color: black;
 }
 
-.login-button {
+.signup-button {
   padding: 30px; 
   font-size: 20px;
   background-image: linear-gradient(#0D0C27, #2D2B8D);

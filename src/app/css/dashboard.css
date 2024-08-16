@@ -1,14 +1,28 @@
+.main-dashboard-container {
+  margin-left: 250px; 
+  padding: 20px;     
+}
+
 html, body {
     height: 100%;
     margin: 0;
   }
   
-  body.dashboard-body {
-    background-color: black;
+  body {
+    background-color:black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    color: #eee;
+  }  
+
+  h1 {
+    color: white;
   }
   
   ul {
     list-style: inside;
+    color: white;
   }
   
   li {

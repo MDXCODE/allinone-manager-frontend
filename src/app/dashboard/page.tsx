@@ -1,6 +1,4 @@
-// src/app/dashboard/page.tsx
-
-'use client';
+"use client";
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -35,8 +33,11 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard">
-      <h1>Welcome to your dashboard</h1>
+    <div className="main-dashboard-container">
+      <div className="dashboard-title">
+        <h1>Dashboard</h1>
+        <h4>The AllInOne User Dashboard</h4>
+      </div>
       <ul>
         <li><strong>Username:</strong> {user.user_name}</li>
         <li><strong>Email:</strong> {user.user_email}</li>
