@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../context/authProvider';
 import Link from 'next/link';
-import "../css/signup.css";
+import "../../css/signup.css";
 
 const SignupPage = () => {
   const { push } = useRouter();

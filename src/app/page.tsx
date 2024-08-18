@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useEffect } from 'react';
 import { useRouter } from "next/navigation";
 import { useAuth } from "../context/authProvider";
-import "./css/login.css";
+import "../css/login.css";
 import Link from 'next/link';
 
 export default function Home() {

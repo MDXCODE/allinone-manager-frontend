@@ -132,9 +132,37 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   useEffect(() => {
-    const checkAuth = async () => {
+
+    const initialCheck = async () => {
+      console.log('performing initial check')
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/auth/check`, {
+          method: 'GET',
+          credentials: 'include',
+        });
+
+        if (response.status === 200) {
+          if (window.location.pathname === '/') {
+            router.push('/dashboard'); 
+          }
+        } else if (response.status === 401) {
+          console.log('check failed')
+          setLoading(false); 
+        }
+      } catch (error) {
+        console.log('error')
+        console.error('Error during initial auth check:', error);
+        setLoading(false); 
+      }
+    };
+
+    initialCheck();
+
+
+    const periodicAuthCheck = async () => {
       try {
         if (window.location.pathname !== '/signup' && window.location.pathname !== '/signupsuccess' ) {
+          console.log('this periodicAuthCheck is run');
           const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/auth/check`, {
             method: 'GET',
             credentials: 'include',
@@ -151,8 +179,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     };
 
-    checkAuth();
-    const intervalId = setInterval(checkAuth, 10000);
+    periodicAuthCheck();
+    const intervalId = setInterval(periodicAuthCheck, 10000);
 
     return () => clearInterval(intervalId);
   }, [router]);
