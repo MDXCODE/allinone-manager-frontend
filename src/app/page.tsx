@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useEffect } from 'react';
 import { useRouter } from "next/navigation";
 import { useAuth } from "../context/authProvider";
-import "../css/login.css";
+import "../css/forms-css/login.css";
 import Link from 'next/link';
 
 export default function Home() {
@@ -42,7 +42,7 @@ export default function Home() {
       <div className="main-box">
         <div className="main-login-titles">
           <h1 className="main-login-titles-h1">AllInOne</h1>
-          <h5 className="main-login-titles-h5">The Only Task Manager You Need</h5>
+          <h5 className="main-login-titles-h5">The Only Productivity Manager You Need</h5>
         </div>
 
         <form onSubmit={handleSubmit} className="main-login-input">
@@ -83,6 +83,7 @@ export default function Home() {
           </div>
 
         </form>
+        
       </div>
     </main>
   );

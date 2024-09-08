@@ -4,7 +4,7 @@ import '../css/globals.css';
 import { Inter } from 'next/font/google';
 import { AuthProvider } from '../context/authProvider';
 import { AuxRequestsProvider } from '../context/auxRequests';
-import Sidebar from '../components/sidebar'; 
+import Sidebar from '../components/nav/sidebar'; 
 import { usePathname } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });

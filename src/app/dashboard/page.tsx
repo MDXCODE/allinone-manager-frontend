@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../context/authProvider';
 import { useAuxRequests, Task, Project } from '../../context/auxRequests';
-import "../../css/dashboard.css";
+import "../../css/pages-css/dashboard.css";
 
 const Dashboard = () => {
   const { user, loading: authLoading, error: authError, logout } = useAuth();
@@ -14,6 +14,9 @@ const Dashboard = () => {
 
   const {getUserProjects} = useAuxRequests();
   const [projects, setProjects] = useState<Project[]>([]);
+
+  //const {getUserNotes} = useAuxRequests();
+  //const [notes, setNotes] = useState<Project[]>([]);
 
   const router = useRouter();
   const reloadCount = Number(sessionStorage.getItem('reloadCount')) || 0;
@@ -68,6 +71,7 @@ const Dashboard = () => {
 
   return (
     <div className="main-dashboard-container">
+      <title>Dashboard Page</title>
       <div className="dashboard-title">
         <h1>Dashboard</h1>
         <h4>The AllInOne User Dashboard</h4>

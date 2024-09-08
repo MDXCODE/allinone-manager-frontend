@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../context/authProvider';
 import Link from 'next/link';
-import "../../css/signup.css";
+import "../../css/forms-css/signup.css";
 
 const SignupPage = () => {
   const { push } = useRouter();
@@ -95,6 +95,12 @@ const SignupPage = () => {
           </div>
 
         </form>
+
+        
+        <div className="note-of-warning-div">
+          <p className="note-of-warning">Note: Do NOT use sensitive information when signing on to test the app. Use a fake email, username and password.</p>
+        </div>
+
       </div>
     </main>
       );

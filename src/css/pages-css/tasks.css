@@ -1,0 +1,270 @@
+.main-tasks-page-container {
+    margin-left: 275px;
+    padding: 20px;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    color: #eee;
+}
+
+.tasks-page-titles {
+    margin-top: -13px;
+}
+
+.tasks-page-titles-main-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 27px;
+    color: #FFF733;
+    margin-bottom: 4px;
+}
+
+.tasks-page-titles-sub-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
+    margin-top: 0;
+}
+
+.tasks-page {
+    display: flex;
+    gap: 20px;
+    padding-left: 120px;
+}
+
+.all-tasks-container {
+    background-image: linear-gradient(#0D0C27, #2D2B8D);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    height: 82vh;
+    width: 45vw;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+.tasks-side-container {
+    padding-left: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+}
+
+.overdue-tasks-container,
+.sortbyproject-tasks-container {
+    background-image: linear-gradient(#0D0C27, #2D2B8D);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    width: 17vw;
+    border-radius: 10px;
+    overflow: auto;
+}
+
+
+.overdue-tasks-container {
+    height: 37vh;
+}
+
+.sortbyproject-tasks-container {
+    height: 37vh;
+}
+
+.all-tasks-container-title {
+    display: flex;
+    padding-left: 25px;
+    padding-right: 25px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.all-tasks-container-title h3 {
+    margin: 0;
+}
+
+.all-tasks-container-tasks {
+    padding: 0 25px;
+}
+
+.add-tasks-top-border {
+    background-color: rgb(201, 201, 201);
+    width: 95%;
+    height: 2px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.add-tasks-top-separator {
+    padding-bottom: 20px;
+}
+
+.overdue-tasks-container-title {
+    padding-top: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 15px;
+}
+
+.overdue-tasks-container-title h3 {
+   margin: 0;
+}
+
+.overdue-tasks-container-tasks {
+    padding-left: 25px;
+    padding-right: 25px;
+    align-items: center;
+}
+
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.task-item:hover {
+    transform: scale(1.05);
+}
+
+
+.overall-task-formatting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+}
+
+
+.individual-task-formatting {
+    margin: 0;
+    padding: 0;
+    flex: 1;
+}
+
+
+.individual-task-formatting h4,
+.individual-task-formatting p {
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.individual-project-formatting {
+}
+
+
+.task-project-name {
+    margin: 0;
+    padding: 0;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.sortbyproject-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.sortbyproject-title h3 {
+    margin: 0;
+}
+
+.sortbyproject-clear-filter-button {
+    background-color: #f0f0f0;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 70px;
+    height: 30px;
+}
+
+.is-completed-button {
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    border: 2px solid #ffffff; 
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 16px; 
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s, border-color 0.3s;
+    box-sizing: border-box; 
+}
+
+.is-completed-button:hover {
+    background-color: #f0f0f0;
+    border-color: #FFF733;
+}
+
+.is-completed-button:active {
+    background-color: #e0e0e0;
+    border-color: #FFF733;
+}
+
+.add-task-button {
+    margin: 10px 0;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .add-project-button {
+    margin: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 30px;
+    width: 50px;
+    padding: 2px 2px;
+  }
+
+  .manage-project-button {
+    margin: 10px 0;
+    background-color: #ff9100;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 30px;
+    width: 51px;
+    padding: 2px 2px;
+    font-size: 23px;
+  }
+
+  .sortbyprojects-buttons-div {
+    display: flex;
+    gap: 10px;
+  }
+
+  .project-list {
+    color: black;
+  }

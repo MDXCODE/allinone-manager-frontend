@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
+import { useCookies } from 'next-client-cookies';
 
 interface User {
   user_name: string;

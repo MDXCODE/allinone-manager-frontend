@@ -1,23 +1,23 @@
 import Image, { StaticImageData } from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import "../css/sidebar.css";
+import "../../css/components-css/sidebar.css";
 import { useRouter } from "next/navigation"; 
 import Link from "next/link";
-import { useAuth } from "../context/authProvider"; 
+import { useAuth } from "../../context/authProvider"; 
 
-import dashboardIcon from "../images/sidebarimages/Dashboard Icon.svg";
-import dashboardIconHover from "../images/sidebarimages/Dashboard Icon Hover.svg";
-import logoutIcon from "../images/sidebarimages/Logout Icon.svg";
-import logoutIconHover from "../images/sidebarimages/Logout Icon Hover.svg";
-import notesIcon from "../images/sidebarimages/Notes Icon.svg";
-import notesIconHover from "../images/sidebarimages/Notes Icon Hover.svg";
-import remindersIcon from "../images/sidebarimages/Reminders Icon.svg";
-import remindersIconHover from "../images/sidebarimages/Reminders Icon Hover.svg";
-import tasksIcon from "../images/sidebarimages/Tasks Icon.svg";
-import tasksIconHover from "../images/sidebarimages/Tasks Icon Hover.svg";
-import userIcon from "../images/sidebarimages/User Icon.svg";
-import userIconHover from "../images/sidebarimages/User Icon Hover.svg"; 
+import dashboardIcon from "../../images/sidebarimages/Dashboard Icon.svg";
+import dashboardIconHover from "../../images/sidebarimages/Dashboard Icon Hover.svg";
+import logoutIcon from "../../images/sidebarimages/Logout Icon.svg";
+import logoutIconHover from "../../images/sidebarimages/Logout Icon Hover.svg";
+import notesIcon from "../../images/sidebarimages/Notes Icon.svg";
+import notesIconHover from "../../images/sidebarimages/Notes Icon Hover.svg";
+import remindersIcon from "../../images/sidebarimages/Reminders Icon.svg";
+import remindersIconHover from "../../images/sidebarimages/Reminders Icon Hover.svg";
+import tasksIcon from "../../images/sidebarimages/Tasks Icon.svg";
+import tasksIconHover from "../../images/sidebarimages/Tasks Icon Hover.svg";
+import userIcon from "../../images/sidebarimages/User Icon.svg";
+import userIconHover from "../../images/sidebarimages/User Icon Hover.svg"; 
 
 const Sidebar = () => {
   const pathname = usePathname();
