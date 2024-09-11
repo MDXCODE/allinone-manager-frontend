@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../../css/forms-css/popup.css";
-import { useAuxRequests, Project, Task } from "../../../context/api-context/auxRequests";
+import { Project, useProjects } from "../../../context/page-context/projectContext";
+import { Task, useTasks } from "../../../context/page-context/tasksContext";
 
 interface EditTaskPopupFormProps {
   isOpen: boolean;
@@ -22,7 +23,7 @@ const EditTaskPopupForm: React.FC<EditTaskPopupFormProps> = ({
     return date.toISOString().split("T")[0];
   };
 
-  const { editTask } = useAuxRequests();
+  const { editTask } = useTasks();
 
   const [taskName, setTaskName] = useState(task.task_name);
   const [taskDesc, setTaskDesc] = useState(task.task_desc);

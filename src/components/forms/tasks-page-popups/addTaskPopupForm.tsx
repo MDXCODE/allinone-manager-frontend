@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "../../../css/forms-css/popup.css";
-import { useAuxRequests, Project } from "../../../context/api-context/auxRequests";
+import { Project, useProjects } from "../../../context/page-context/projectContext";
+import { Task, useTasks } from "../../../context/page-context/tasksContext";
 
 interface TaskFormPopupProps {
   isOpen: boolean;
   onClose: () => void;
-  onTaskAdded: () => void;  // Expected signature
+  onTaskAdded: () => void;  
   projects: Project[];
 }
 
@@ -15,7 +16,7 @@ const TaskFormPopup: React.FC<TaskFormPopupProps> = ({ isOpen, onClose, onTaskAd
   const [dueDate, setDueDate] = useState("");
   const [projectId, setProjectId] = useState<string | null>(null);
 
-  const { addNewTask } = useAuxRequests();
+  const { addNewTask } = useTasks();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

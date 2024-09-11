@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import "../../css/pages-css/tasks.css";
-import { useAuxRequests, Task, Project } from "../../context/api-context/auxRequests";
+import { Task, useTasks } from "../../context/page-context/tasksContext";
+import { Project, useProjects } from "../../context/page-context/projectContext";
 
 import TaskFormPopup from "../../components/forms/tasks-page-popups/addTaskPopupForm";
 import EditTaskPopupForm from "../../components/forms/tasks-page-popups/editTaskPopupForm";
@@ -23,7 +24,8 @@ const isTaskDueTodayOrLater = (taskDueDate: string) => {
 };
 
 const TasksPage = () => {
-  const { getUserTasks, getUserProjects, completeTask, loadingTasks, errorTasks, addNewProject } = useAuxRequests();
+  const { getUserTasks, completeTask, loadingTasks, errorTasks } = useTasks();
+  const { getUserProjects } = useProjects();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [overdueTasks, setOverdueTasks] = useState<Task[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
@@ -75,7 +77,6 @@ const TasksPage = () => {
       const overdue = sortedTasks.filter(
         (task) => !isTaskDueTodayOrLater(task.task_due_date)
       );
-
       setTasks(nonOverdueTasks);
       setOverdueTasks(overdue);
     }

@@ -1,7 +1,7 @@
 "use client"
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useNotes } from "../../context/page-context/notesContext";
 import EditNotePopupForm from "../../components/forms/notes-page-popups/editNotesPopupForm";
 import AddNotePopupForm from "../../components/forms/notes-page-popups/addNotesPopupForm";
@@ -10,9 +10,16 @@ import { Note } from "../../context/page-context/notesContext";
 
 const NotesPage = () => {
   const { push } = useRouter();
+  const searchParams = useSearchParams();
   const { homeSelectedNote, setHomeSelectedNote, notes, handleNoteUpdates, deleteNote } = useNotes();
   const [isEditNotePopupOpen, setIsEditNotePopupOpen] = useState(false);
   const [isAddNotePopupOpen, setIsAddNotePopupOpen] = useState(false);
+
+  useEffect(() => {
+    if (homeSelectedNote) {
+      setIsEditNotePopupOpen(true);
+    }
+  }, [homeSelectedNote]);
 
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);

@@ -5,14 +5,16 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {useNotes, Note} from "../../context/page-context/notesContext";
 import { useAuth } from "../../context/auth-context/authProvider";
-import { useAuxRequests, Task, Project } from "../../context/api-context/auxRequests";
+import { useAuxRequests } from "../../context/api-context/auxRequests";
+import {Task, useTasks} from "../../context/page-context/tasksContext";
+import {Project, useProjects} from "../../context/page-context/projectContext";
 import "../../css/pages-css/dashboard.css";
 import notesIcon from "../../images/dashboard-images/transparentNotesIcon.svg";
 
 const Dashboard = () => {
   const { user, loading: authLoading, error: authError, logout } = useAuth();
 
-  const { getUserTasks } = useAuxRequests();
+  const { getUserTasks } = useTasks();
   const [tasks, setTasks] = useState<Task[]>([]);
 
   const { getUserProjects } = useAuxRequests();
@@ -25,12 +27,13 @@ const Dashboard = () => {
   const reloadCount = Number(sessionStorage.getItem("reloadCount")) || 0;
 
   const { setHomeSelectedNote } = useNotes();
+  const [isEditNotePopupOpen, setIsEditNotePopupOpen] = useState(false);
 
   const handleNoteClick = async (noteId: string) => {
     const note = notes.find((n) => n.note_id === noteId);
     if (note) {
       setHomeSelectedNote(note); 
-      router.push("/notes");
+      router.push("/notes"); 
     }
   };
 

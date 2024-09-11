@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../../css/forms-css/popup.css";
-import { useAuxRequests, Project } from "../../../context/api-context/auxRequests";
+import { Project, useProjects } from "../../../context/page-context/projectContext";
 
 interface AddProjectPopupFormProps {
   isOpen: boolean;
@@ -19,7 +19,7 @@ const AddProjectPopupForm: React.FC<AddProjectPopupFormProps> = ({
   const [projectDesc, setProjectDesc] = useState("");
   const [dueDate, setDueDate] = useState("");
 
-  const { addNewProject } = useAuxRequests();
+  const { addNewProject } = useProjects();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

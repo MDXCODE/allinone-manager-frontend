@@ -1,6 +1,6 @@
 import React from "react";
 import "../../../css/forms-css/popup.css";
-import { Project, useAuxRequests } from "../../../context/api-context/auxRequests";
+import { Project, useProjects } from "../../../context/page-context/projectContext";
 
 interface ManageProjectPopupProps {
   isOpen: boolean;
@@ -15,7 +15,7 @@ const ManageProjectPopupForm: React.FC<ManageProjectPopupProps> = ({
   projects,
   onProjectEdited,
 }) => {
-  const { deleteProject } = useAuxRequests();
+  const { deleteProject } = useProjects();
 
   if (!isOpen) return null;
 

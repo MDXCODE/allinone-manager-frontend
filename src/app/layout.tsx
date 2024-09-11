@@ -4,6 +4,8 @@ import "../css/globals.css";
 import { Inter } from "next/font/google";
 import { AuthProvider } from "../context/auth-context/authProvider";
 import { NotesProvider } from "../context/page-context/notesContext";
+import { TasksProvider } from "../context/page-context/tasksContext";
+import { ProjectsProvider } from "../context/page-context/projectContext";
 import { AuxRequestsProvider } from "../context/api-context/auxRequests";
 import Sidebar from "../components/nav/sidebar";
 import { usePathname } from "next/navigation";
@@ -24,8 +26,12 @@ export default function RootLayout({
         <AuthProvider>
           <AuxRequestsProvider>
             <NotesProvider>
-              {!sidebarExcludedRoutes.includes(pathname) && <Sidebar />}
-              {children}
+              <TasksProvider>
+                <ProjectsProvider>
+                  {!sidebarExcludedRoutes.includes(pathname) && <Sidebar />}
+                  {children}
+                </ProjectsProvider>
+              </TasksProvider>
             </NotesProvider>
           </AuxRequestsProvider>
         </AuthProvider>
