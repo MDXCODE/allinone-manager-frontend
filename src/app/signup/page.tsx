@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '../../context/authProvider';
+import { useAuth } from '../../context/auth-context/authProvider';
 import Link from 'next/link';
 import "../../css/forms-css/signup.css";
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../../css/forms-css/popup.css";
-import { useAuxRequests, Note } from "../../../context/auxRequests";
+import { useAuxRequests} from "../../../context/api-context/auxRequests";
+import { useNotes, Note } from "../../../context/page-context/notesContext";
 
 interface AddNotePopupFormProps {
   isOpen: boolean;
@@ -16,7 +17,7 @@ const AddNotePopupForm: React.FC<AddNotePopupFormProps> = ({
   const [noteTitle, setNoteTitle] = useState("");
   const [noteContent, setNoteContent] = useState("");
 
-  const { addNewNote } = useAuxRequests();
+  const { addNewNote } = useNotes();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

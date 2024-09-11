@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import "../../css/pages-css/tasks.css";
-import { useAuxRequests, Task, Project } from "../../context/auxRequests";
+import { useAuxRequests, Task, Project } from "../../context/api-context/auxRequests";
 
 import TaskFormPopup from "../../components/forms/tasks-page-popups/addTaskPopupForm";
 import EditTaskPopupForm from "../../components/forms/tasks-page-popups/editTaskPopupForm";

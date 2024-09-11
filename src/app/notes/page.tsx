@@ -1,22 +1,16 @@
-"use client";
+"use client"
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "../../context/authProvider";
-import Link from "next/link";
-import "../../css/pages-css/notes.css";
-import { useAuxRequests, Note } from "../../context/auxRequests";
+import { useNotes } from "../../context/page-context/notesContext";
 import EditNotePopupForm from "../../components/forms/notes-page-popups/editNotesPopupForm";
 import AddNotePopupForm from "../../components/forms/notes-page-popups/addNotesPopupForm";
+import "../../css/pages-css/notes.css";
+import { Note } from "../../context/page-context/notesContext";
 
 const NotesPage = () => {
   const { push } = useRouter();
-  const { signup } = useAuth();
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const { getUserNotes, deleteNote, loadingNotes, errorNotes } =
-    useAuxRequests();
-  const [notes, setNotes] = useState<Note[]>([]);
-  const [selectedNote, setSelectedNote] = useState<Note | null>(null);
+  const { homeSelectedNote, setHomeSelectedNote, notes, handleNoteUpdates, deleteNote } = useNotes();
   const [isEditNotePopupOpen, setIsEditNotePopupOpen] = useState(false);
   const [isAddNotePopupOpen, setIsAddNotePopupOpen] = useState(false);
 
@@ -51,61 +45,29 @@ const NotesPage = () => {
     return text.length > limit ? text.substring(0, limit) + "..." : text;
   };
 
-  const fetchUserNotes = async () => {
-    const fetchedNotes = await getUserNotes();
-
-    if (fetchedNotes) {
-      const notes = fetchedNotes.sort(
-        (a, b) =>
-          new Date(a.note_created_date).getTime() -
-          new Date(b.note_created_date).getTime()
-      );
-
-      setNotes(notes);
-    }
-  };
-
-  const handleNoteAdded = async () => {
-    await fetchUserNotes();
-  };
-
-  const handleNoteUpdates = async () => {
-    await fetchUserNotes();
-  };
-
   const handleEditNote = (note: Note) => {
-    setSelectedNote(note);
+    setHomeSelectedNote(note);
     setIsEditNotePopupOpen(true);
   };
 
   const handleDeleteNote = async (noteId: string) => {
     try {
       await deleteNote(noteId);
-      await handleNoteUpdates();
+      handleNoteUpdates();  // Refresh notes after deletion
     } catch (e) {
       console.error("Failed to delete note", e);
     }
   };
 
-  useEffect(() => {
-    fetchUserNotes();
-  }, [getUserNotes]);
-
-  if (loadingNotes) {
+  if (!notes) {
     return <div>Loading notes...</div>;
-  }
-
-  if (errorNotes) {
-    return <div>Error loading notes: {errorNotes}</div>;
   }
 
   return (
     <div className="main-notes-page-container">
       <div className="notes-page-titles">
         <h2 className="notes-page-titles-main-title">Notes</h2>
-        <h4 className="notes-page-titles-sub-title">
-          The AllInOne User Notes Page
-        </h4>
+        <h4 className="notes-page-titles-sub-title">The AllInOne User Notes Page</h4>
       </div>
       <div className="notes-page-content">
         <div className="all-notes-container-box">
@@ -113,10 +75,7 @@ const NotesPage = () => {
             <div>
               <h3>All Notes</h3>
             </div>
-            <button
-              onClick={() => setIsAddNotePopupOpen(true)}
-              className="add-note-button"
-            >
+            <button onClick={() => setIsAddNotePopupOpen(true)} className="add-note-button">
               Add Note
             </button>
           </div>
@@ -124,36 +83,23 @@ const NotesPage = () => {
           <div className="add-notes-top-separator"></div>
           <div className="notes-cards-container">
             {notes.map((note) => (
-              <div
-                key={note.note_id}
-                onClick={() => handleEditNote(note)}
-                className="individual-notes-card"
-              >
+              <div key={note.note_id} onClick={() => handleEditNote(note)} className="individual-notes-card">
                 <div className="individual-note-titles">
                   <p className="notes-individual-title">
                     {note.note_title}{" "}
-                    <p className="note-date">
-                      {formatDate(note.note_created_date)}
-                    </p>
+                    <p className="note-date">{formatDate(note.note_created_date)}</p>
                   </p>
-
-                  <button
-                    className="delete-button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDeleteNote(note.note_id);
-                    }}
-                  >
+                  <button className="delete-button" onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteNote(note.note_id);
+                  }}>
                     Delete
                   </button>
                 </div>
-
                 <div className="notes-small-padding"></div>
                 <div className="notes-small-separator"></div>
                 <div className="notes-small-padding"></div>
-                <p className="notes-individual-desc">
-                  {truncateText(note.note_content, 321)}
-                </p>
+                <p className="notes-individual-desc">{truncateText(note.note_content, 321)}</p>
               </div>
             ))}
           </div>
@@ -163,18 +109,18 @@ const NotesPage = () => {
       <AddNotePopupForm
         isOpen={isAddNotePopupOpen}
         onClose={() => setIsAddNotePopupOpen(false)}
-        onNoteAdded={handleNoteAdded}
+        onNoteAdded={handleNoteUpdates}
       />
 
-      {selectedNote && (
+      {homeSelectedNote && (
         <EditNotePopupForm
           isOpen={isEditNotePopupOpen}
           onClose={() => {
             setIsEditNotePopupOpen(false);
-            setSelectedNote(null);
+            setHomeSelectedNote(null);
           }}
           onNoteUpdated={handleNoteUpdates}
-          note={selectedNote}
+          note={homeSelectedNote}
         />
       )}
     </div>

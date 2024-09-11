@@ -1,38 +1,128 @@
-.main-dashboard-container {
-  margin-left: 250px; 
-  padding: 20px;     
-}
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;700;800;900&display=swap');
 
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
-  }
-  
-  body {
-    background-color:black;
+}
+
+
+body {
+    background-color: black;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center top;
     color: #eee;
-  }  
+}
 
-  h1 {
-    color: white;
-  }
-  
-  ul {
-    list-style: inside;
-    color: white;
-  }
-  
-  li {
-    font-size: 20px;
-    margin-bottom: 5px;
-    cursor: pointer;
-    transition: all 0.4s ease;
-  }
-  
-  li:hover {
-    scale: 1.02;
-  }
-  
+p, h1, h2, h3, h4 {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.main-dashboard-page-container {
+    margin-left: 275px;
+    margin-right: 40px;
+    padding: 20px;
+}
+
+
+.dashboard-page-titles-main-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 27px;
+    color: #FFF733;
+    margin-bottom: 4px;
+}
+
+.dashboard-page-titles-sub-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
+    margin-top: 0;
+}
+
+.dashboard-elements-full-container {
+    padding: 10px;
+}
+
+.dashboard-elements-full-container-layer-one {
+    display: flex;
+}
+
+.dashboard-intro-paragraph-container {
+    width: 650px;
+    padding-right: 55px;
+}
+
+.dashboard-intro-paragraph-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.dashboard-intro-paragraph-content {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
+    padding: 0;
+    margin: 0;
+}
+
+.current-notes-container {
+    background-color: #F1F1F1;
+    width: 340px;
+    height: 305px;
+    border-radius: 10px;
+    color: black;
+}
+
+.current-notes-container-header {
+    padding: 0px;
+    padding-left: 23px;
+    padding-right: 23px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.view-all-text {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    color: #3B86F8;
+}
+
+.view-all-text:hover {
+    font-weight:bold;
+    transform:translateX(2px)
+}
+
+.current-notes-inner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    
+}
+
+.note-card {
+    padding-left: 15px;
+    display: flex;
+    align-items: center; 
+    text-align:left; 
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    border: 2px solid #EBEBEB;
+    width: 290px;
+    height: 70px;
+}
+
+.note-card:hover {
+    transform: scale(1.05);
+}
+
+.note-card-text {
+    padding-left: 10px;
+}

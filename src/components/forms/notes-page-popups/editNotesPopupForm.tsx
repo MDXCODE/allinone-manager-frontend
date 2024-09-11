@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../../css/forms-css/popup.css";
-import { useAuxRequests, Note } from "../../../context/auxRequests";
+import { useAuxRequests} from "../../../context/api-context/auxRequests";
+import { useNotes, Note } from "../../../context/page-context/notesContext";
 
 interface EditNotePopupFormProps {
   isOpen: boolean;
@@ -18,7 +19,7 @@ const EditNotePopupForm: React.FC<EditNotePopupFormProps> = ({
   const [noteTitle, setNoteTitle] = useState(note.note_title);
   const [noteContent, setNoteContent] = useState(note.note_content);
 
-  const { editNote } = useAuxRequests();
+  const { editNote } = useNotes();
 
   useEffect(() => {
     if (note.note_title === "No Title") {

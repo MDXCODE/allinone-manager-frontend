@@ -130,9 +130,9 @@ button:hover {
 }
 
 .note-of-warning-div {
-
-}
-
-.note-of-warning {
-  color: black;
-}
+  padding-top: 35px;
+ }
+ 
+ .note-of-warning {
+   color: black;
+ } 

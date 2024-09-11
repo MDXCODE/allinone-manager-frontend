@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useEffect } from 'react';
 import { useRouter } from "next/navigation";
-import { useAuth } from "../context/authProvider";
+import { useAuth } from "../context/auth-context/authProvider";
 import "../css/forms-css/login.css";
 import Link from 'next/link';
 
@@ -83,6 +83,10 @@ export default function Home() {
           </div>
 
         </form>
+
+        <div className="note-of-warning-div">
+          <p className="note-of-warning">NOTE: For the best experience, I suggest viewing on Chrome.</p>
+        </div>
         
       </div>
     </main>

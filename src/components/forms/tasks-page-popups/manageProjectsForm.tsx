@@ -1,6 +1,6 @@
 import React from "react";
 import "../../../css/forms-css/popup.css";
-import { Project, useAuxRequests } from "../../../context/auxRequests";
+import { Project, useAuxRequests } from "../../../context/api-context/auxRequests";
 
 interface ManageProjectPopupProps {
   isOpen: boolean;

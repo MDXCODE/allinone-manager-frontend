@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "../../../css/forms-css/popup.css";
-import { useAuxRequests, Project } from "../../../context/auxRequests";
+import { useAuxRequests, Project } from "../../../context/api-context/auxRequests";
 
 interface TaskFormPopupProps {
   isOpen: boolean;
   onClose: () => void;
-  onTaskAdded: () => void; 
-  projects: Project[]; 
+  onTaskAdded: () => void;  // Expected signature
+  projects: Project[];
 }
 
 const TaskFormPopup: React.FC<TaskFormPopupProps> = ({ isOpen, onClose, onTaskAdded, projects }) => {

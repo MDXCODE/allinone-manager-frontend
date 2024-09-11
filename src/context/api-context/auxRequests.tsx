@@ -23,33 +23,20 @@ export interface Project {
   is_completed: boolean;
 }
 
-export interface Note {
-  note_id: string;
-  user_id: string;
-  note_title: string;
-  note_content: string;
-  note_created_date: string;
-}
 
 interface AuxRequestsContextType {
   getUserTasks: () => Promise<Task[] | null>;
   getUserProjects: () => Promise<Project[] | null>;
-  getUserNotes: () => Promise<Note[] | null>;
   addNewProject: (projectName: string, projectDesc: string, projectDueDate: string) => Promise<any | null>;
-  deleteNote: (noteId: string) => Promise<any | null>;
   deleteProject: (projectId: string) => Promise<any | null>;
   updateUserDetails: (username: string, firstname: string, lastname: string, email: string) => Promise<any | null>;
   addNewTask: (taskName: string, taskDesc: string, taskDueDate: string, projectId: string | null) => Promise<any | null>;
   editTask: (taskId: string, taskName: string, taskDesc: string, taskDueDate: string, projectId: string | null) => Promise<any | null>;
-  addNewNote: (noteTitle: string, noteContent: string) => Promise<any | null>;
-  editNote: (noteId: string, noteTitle: string, noteContent: string) => Promise<any | null>;
   completeTask: (taskId: string) => Promise<any | null>;
   loadingTasks: boolean;
   loadingProjects: boolean;
-  loadingNotes: boolean;
   errorTasks: string | null;
   errorProjects: string | null;
-  errorNotes: string | null;
 }
 
 const AuxRequestsContext = createContext<AuxRequestsContextType | undefined>(undefined);
@@ -57,103 +44,9 @@ const AuxRequestsContext = createContext<AuxRequestsContextType | undefined>(und
 export const AuxRequestsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [loadingTasks, setLoadingTasks] = useState<boolean>(false);
   const [loadingProjects, setLoadingProjects] = useState<boolean>(false);
-  const [loadingNotes, setLoadingNotes] = useState<boolean>(false);
   const [errorTasks, setErrorTasks] = useState<string | null>(null);
   const [errorProjects, setErrorProjects] = useState<string | null>(null);
-  const [errorNotes, setErrorNotes] = useState<string | null>(null);
 
-  const getUserNotes = useCallback(async (): Promise<Note[] | null> => {
-    setLoadingNotes(true);
-    setErrorNotes(null);
-
-    try {
-
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/notes/usernotes`,
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
-
-      if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(`Failed to fetch user notes: ${errorText}`);
-      }
-
-      const data = await res.json();
-      return data.data;
-
-    } catch (e) {
-      if (e instanceof Error) {
-        setErrorNotes(e.message);
-      } else {
-        setErrorNotes("An unknown error occurred");
-      }
-      return null;
-    } finally {
-      setLoadingNotes(false);
-    }
-
-  }, []);
-
-  const addNewNote = async (noteTitle: string, noteContent: string) => {
-
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/notes`;
-    try {
-      const res = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ note_title: noteTitle, note_content: noteContent }),
-        credentials: 'include',
-      });
-    
-      if (!res.ok) {
-        const errorText = await res.text();
-        console.error('Failed to add note:', errorText);
-        throw new Error(`Failed to add note: ${errorText}`);
-      }
-    
-      console.log('Note added successfully');
-    } catch (e) {
-      if (e instanceof Error) {
-        console.error(e.message);
-      } else {
-        console.error('An unknown error occurred');
-      }
-      return null;
-    }
-  
-  };
-
-
-  const editNote = async (noteId: string, noteTitle: string, noteContent: string) => {
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/notes`;
-    try {
-      const res = await fetch(apiUrl, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ note_id: noteId, note_title: noteTitle, note_content: noteContent}),
-        credentials: 'include',
-      });
-    
-      if (!res.ok) {
-        const errorText = await res.text();
-        console.error('Failed to update note:', errorText);
-        throw new Error(`Failed to update note: ${errorText}`);
-      }
-    
-      console.log('Note updated successfully');
-    } catch (e) {
-      if (e instanceof Error) {
-        console.error(e.message);
-      } else {
-        console.error('An unknown error occurred');
-      }
-      return null;
-    }
-  
-  };
 
   const getUserProjects = useCallback(async (): Promise<Project[] | null> => {
     setLoadingProjects(true);
@@ -214,33 +107,6 @@ export const AuxRequestsProvider: React.FC<{ children: React.ReactNode }> = ({ c
     }
   };
   
-  const deleteNote = async (noteId: string) => {
-    
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/notes`, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ note_id: noteId}),
-        credentials: 'include',
-      });
-  
-      if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(`Failed to delete note: ${errorText}`);
-      }
-  
-      console.log('Note deleted');
-
-    } catch (e) {
-      if (e instanceof Error) {
-        setErrorTasks(e.message);
-      } else {
-        setErrorTasks('An unknown error occurred');
-      }
-      return null;
-    }
-
-  }
 
   const deleteProject = async (projectId: string) => {
     
@@ -415,7 +281,7 @@ export const AuxRequestsProvider: React.FC<{ children: React.ReactNode }> = ({ c
   };
 
   return (
-    <AuxRequestsContext.Provider value={{ getUserTasks, getUserNotes, addNewProject, deleteNote, deleteProject, getUserProjects, addNewTask, editTask, addNewNote, editNote, completeTask, updateUserDetails, loadingTasks, loadingProjects, loadingNotes, errorTasks, errorProjects, errorNotes }}>
+    <AuxRequestsContext.Provider value={{ getUserTasks, addNewProject, deleteProject, getUserProjects, addNewTask, editTask,completeTask, updateUserDetails, loadingTasks, loadingProjects,  errorTasks, errorProjects }}>
       {children}
     </AuxRequestsContext.Provider>
   );

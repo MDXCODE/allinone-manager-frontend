@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "../../context/authProvider";
-import { useAuxRequests } from "../../context/auxRequests";
+import { useAuth } from "../../context/auth-context/authProvider";
+import { useAuxRequests } from "../../context/api-context/auxRequests";
 import Image from "next/image";
-import profilePlaceholder from "../../images/profileplaceholder/placeholder.jpg";
+import profilePlaceholder from "../../images/profile-images/placeholder.jpg";
 import "../../css/pages-css/profile.css";
 
 const ProfilePage = () => {
