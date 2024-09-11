@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;700;800;900&display=swap');
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+
+body {
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    color: #eee;
+}
+
+.main-notes-page-container {
+    margin-left: 275px;
+    padding: 20px;
+}
+
+.notes-page-titles {
+    margin-top: -13px;
+}
+
+.notes-page-titles-main-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 27px;
+    color: #FFF733;
+    margin-bottom: 4px;
+}
+
+.notes-page-titles-sub-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
+    margin-top: 0;
+}
+
+
+.all-notes-container-box {
+    background-image: linear-gradient(#0D0C27, #2D2B8D);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    height: 82vh;
+    width: 82vw;
+    min-height: 300px;
+    min-width: 300px;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+.notes-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+}
+
+.individual-notes-card {
+    padding: 2px 10px;
+    border: 3px solid white;
+    border-radius: 10px;
+    color: white;
+    width: 450px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow: hidden;
+}
+
+.individual-notes-card:hover {
+    border: 3px solid #FFF733;
+    transition: border 0.3s;
+    transform: scale(1.05);
+    transform: rotate(0.5deg);
+}
+
+
+.notes-small-padding {
+    padding: 5px;
+}
+
+.notes-small-separator {
+    background-color: white;
+    width: 150px;
+    height: 2px;
+}
+
+.notes-individual-title {
+    font-weight: 900;
+    margin-bottom: 0;
+
+}
+
+.notes-individual-desc {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    margin-top: 0;
+
+}
+
+
+.add-note-button {
+    margin: 10px 0;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.all-notes-container-title {
+    display: flex;
+    padding-left: 35px;
+    padding-right: 35px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-notes-top-border {
+    background-color: rgb(201, 201, 201);
+    width: 95%;
+    height: 2px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.add-notes-top-separator {
+    padding-bottom: 20px;
+}
+
+.individual-note-titles {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notes-individual-title {
+    margin: 10px 0 0;
+}
+
+.delete-button {
+    margin: 10px 0 0;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.note-date {
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+}
+
+.all-notes-container-box::-webkit-scrollbar {
+    width: 5px;
+}
+
+.all-notes-container-box::-webkit-scrollbar-track {
+    background-image: linear-gradient(#0D0C27, #2D2B8D);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+.all-notes-container-box::-webkit-scrollbar-thumb {
+    background: rgba(255, 247, 51, 0.3); 
+    border-radius: 10px;
+}
+
+.all-notes-container-box::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 247, 51, 0.3); 
+    opacity: 0.1;  
+}

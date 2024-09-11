@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../../css/forms-css/popup.css";
-import { useAuxRequests, Project } from "../../context/auxRequests";
+import "../../../css/forms-css/popup.css";
+import { useAuxRequests, Project } from "../../../context/auxRequests";
 
 interface TaskFormPopupProps {
   isOpen: boolean;

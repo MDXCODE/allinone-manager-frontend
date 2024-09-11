@@ -3,10 +3,11 @@
 import React, { useEffect, useState } from "react";
 import "../../css/pages-css/tasks.css";
 import { useAuxRequests, Task, Project } from "../../context/auxRequests";
-import TaskFormPopup from "../../components/forms/addTaskPopupForm";
-import EditTaskPopupForm from "../../components/forms/editTaskPopupForm";
-import AddProjectPopupForm from "../../components/forms/addProjectPopupForm";
-import ManageProjectPopupForm from "../../components/forms/manageProjectsForm";
+
+import TaskFormPopup from "../../components/forms/tasks-page-popups/addTaskPopupForm";
+import EditTaskPopupForm from "../../components/forms/tasks-page-popups/editTaskPopupForm";
+import AddProjectPopupForm from "../../components/forms/tasks-page-popups/addProjectPopupForm";
+import ManageProjectPopupForm from "../../components/forms/tasks-page-popups/manageProjectsForm";
 
 const isTaskDueTodayOrLater = (taskDueDate: string) => {
   const today = new Date();
@@ -33,6 +34,27 @@ const TasksPage = () => {
   const [isAddProjectPopupOpen, setIsAddProjectPopupOpen] = useState(false);
   const [isEditProjectPopupOpen, setIsEditProjectPopupOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+
+  const formatDate = (dateStr: string) => {
+    
+    const date = new Date(dateStr);
+    const day = date.getDate();
+    const month = date.toLocaleString('en-US', { month: 'short' });
+    const year = date.getFullYear();
+
+    const getSuffix = (day: number) => {
+      if (day > 3 && day < 21) return 'th'; 
+      switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+      }
+    };
+  
+    const suffix = getSuffix(day);
+    return `${month} ${day}${suffix}, ${year}`;
+  };
 
   const fetchAndCategorizeTasks = async () => {
     const fetchedTasks = await getUserTasks();
@@ -89,6 +111,7 @@ const TasksPage = () => {
     setSelectedTask(task);
     setIsEditPopupOpen(true);
   };
+  
 
   const truncateText = (text: string, limit: number): string => {
     return text.length > limit ? text.substring(0, limit) + '...' : text;
@@ -167,11 +190,12 @@ const TasksPage = () => {
                   <div className="overall-task-formatting">
                     <div className="individual-task-formatting">
                       <h4>{task.task_name}</h4>
-                      <p>{truncateText(task.task_desc, 55)}</p>
+                      <p className="task-desc">{truncateText(task.task_desc, 55)}</p>
                     </div>
                     <div className="individual-project-formatting">
                       <p className="task-project-name">
-                        {projectMap.get(task.project_id) || "No Project"}
+                        {projectMap.get(task.project_id) || "No Project"}<br />
+                        <p className="task-due-date-formatting">{formatDate(task.task_due_date)}</p>
                       </p>
                     </div>
                   </div>
@@ -184,7 +208,7 @@ const TasksPage = () => {
         <div className="tasks-side-container">
           <div className="sortbyproject-tasks-container">
             <div className="sortbyproject-title">
-              <h3>Sort by Project</h3>
+              <h3 className="">Project Filter</h3>
               <div className="sortbyprojects-buttons-div">
               <button 
                onClick={() => setIsEditProjectPopupOpen(true)}
@@ -204,17 +228,16 @@ const TasksPage = () => {
             </div>
             <div className="add-tasks-top-border"></div>
             <div className="add-tasks-top-separator"></div>
-            <div>
+            <div className="project-sort-buttons-container">
               <button
                 onClick={() => handleProjectFilter(null)}
-                className={selectedProject === null ? 'selected' : ''}
+                className={`all-tasks-button ${selectedProject === null ? 'selected' : ''}`}
               >
                 All Tasks
               </button>
               {projects.map((project) => (
                 <div
                   key={project.project_id}
-                  className="project-sort-buttons-container"
                 >
                   <button
                     className={`project-sort-buttons ${selectedProject === project.project_id ? 'selected' : ''}`}

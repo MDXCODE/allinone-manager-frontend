@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;700;800;900&display=swap');
+
 .main-tasks-page-container {
     margin-left: 275px;
     padding: 20px;
@@ -52,6 +54,7 @@ body {
     overflow-y: auto;
 }
 
+
 .tasks-side-container {
     padding-left: 50px;
     display: flex;
@@ -68,6 +71,35 @@ body {
     width: 17vw;
     border-radius: 10px;
     overflow: auto;
+}
+
+.all-tasks-container::-webkit-scrollbar,
+.overdue-tasks-container::-webkit-scrollbar,
+.sortbyproject-tasks-container::-webkit-scrollbar {
+    width: 5px;
+}
+
+.all-tasks-container::-webkit-scrollbar-track,
+.overdue-tasks-container::-webkit-scrollbar-track,
+.sortbyproject-tasks-container::-webkit-scrollbar-track {
+    background-image: linear-gradient(#0D0C27, #2D2B8D);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+.all-tasks-container::-webkit-scrollbar-thumb,
+.overdue-tasks-container::-webkit-scrollbar-thumb,
+.sortbyproject-tasks-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 247, 51, 0.3); 
+    border-radius: 10px;
+}
+
+.all-tasks-container::-webkit-scrollbar-thumb:hover,
+.overdue-tasks-container::-webkit-scrollbar-thumb:hover,
+.sortbyproject-tasks-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 247, 51, 0.3); 
+    opacity: 0.1;  
 }
 
 
@@ -115,7 +147,7 @@ body {
 }
 
 .overdue-tasks-container-title h3 {
-   margin: 0;
+    margin: 0;
 }
 
 .overdue-tasks-container-tasks {
@@ -133,7 +165,7 @@ body {
 }
 
 .task-item:hover {
-    transform: scale(1.05);
+    transform: scale(1.01);
 }
 
 
@@ -162,8 +194,7 @@ body {
 }
 
 
-.individual-project-formatting {
-}
+.individual-project-formatting {}
 
 
 .task-project-name {
@@ -171,6 +202,14 @@ body {
     padding: 0;
     text-align: right;
     white-space: nowrap;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+.task-desc {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
 }
 
 .sortbyproject-title {
@@ -197,13 +236,13 @@ body {
 }
 
 .is-completed-button {
-    width: 40px; 
-    height: 40px; 
-    border-radius: 50%; 
-    border: 2px solid #ffffff; 
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
     background-color: transparent;
     color: #ffffff;
-    font-size: 16px; 
+    font-size: 16px;
     text-align: center;
     line-height: 40px;
     cursor: pointer;
@@ -212,7 +251,7 @@ body {
     justify-content: center;
     align-items: center;
     transition: background-color 0.3s, border-color 0.3s;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 .is-completed-button:hover {
@@ -233,9 +272,9 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
+}
 
-  .add-project-button {
+.add-project-button {
     margin: 10px 0;
     background-color: #007bff;
     color: white;
@@ -245,12 +284,11 @@ body {
     height: 30px;
     width: 50px;
     padding: 2px 2px;
-  }
+}
 
-  .manage-project-button {
+.manage-project-button {
     margin: 10px 0;
-    background-color: #ff9100;
-    color: white;
+    color: rgb(0, 0, 0);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -258,13 +296,78 @@ body {
     width: 51px;
     padding: 2px 2px;
     font-size: 23px;
-  }
+}
 
-  .sortbyprojects-buttons-div {
+.sortbyprojects-buttons-div {
     display: flex;
     gap: 10px;
-  }
+}
 
-  .project-list {
+.project-list {
     color: black;
-  }
+}
+
+.project-sort-buttons-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.all-tasks-button {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: #FFFFFF;
+    font-size: 17px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.project-sort-buttons {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: #FFFFFF;
+    font-size: 17px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.all-tasks-button:hover,
+.project-sort-buttons:hover {
+    transform: scale(1.05);
+}
+
+.project-sort-buttons.selected,
+.all-tasks-button.selected{
+    background-image: linear-gradient(#0D0C27, #2D2B8D);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    border: 3px solid #FFFFFF;
+    color: #FFF733;
+}
+
+.individual-project-formatting p {
+    margin: 0;
+    padding: 0;
+}
+
+
+.task-due-date-formatting {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+}

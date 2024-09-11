@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../../css/forms-css/popup.css";
-import { useAuxRequests, Project } from "../../context/auxRequests";
+import "../../../css/forms-css/popup.css";
+import { useAuxRequests, Project } from "../../../context/auxRequests";
 
 interface AddProjectPopupFormProps {
   isOpen: boolean;
@@ -27,7 +27,7 @@ const AddProjectPopupForm: React.FC<AddProjectPopupFormProps> = ({
     try {
       await addNewProject(projectName, projectDesc, dueDate);
 
-      onProjectAdded();  // Call to refresh the project list
+      onProjectAdded();  
       setProjectName("");
       setProjectDesc("");
       setDueDate("");
