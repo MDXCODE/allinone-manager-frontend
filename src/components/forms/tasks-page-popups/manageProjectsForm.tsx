@@ -22,7 +22,7 @@ const ManageProjectPopupForm: React.FC<ManageProjectPopupProps> = ({
   const handleDelete = async (projectId: string) => {
     try {
       await deleteProject(projectId);
-      onProjectEdited();
+      await onProjectEdited();
     } catch (error) {
       console.error("Error deleting project:", error);
       alert("Failed to delete project. Please try again.");

@@ -85,8 +85,7 @@ const ProfilePage = () => {
 
   return (
     <div className="main-profile-container">
-      <title>Profile Page</title>
-
+      <title>Profile</title>
       <div className="profile-page-titles">
         <h2 className="profile-page-titles-main-title">Hello {user.user_name}!</h2>
         <h4 className="profile-page-titles-sub-title">Here you can View or Edit your User Profile</h4>

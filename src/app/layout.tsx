@@ -6,6 +6,7 @@ import { AuthProvider } from "../context/auth-context/authProvider";
 import { NotesProvider } from "../context/page-context/notesContext";
 import { TasksProvider } from "../context/page-context/tasksContext";
 import { ProjectsProvider } from "../context/page-context/projectContext";
+import { RemindersProvider } from "../context/page-context/remindersContext";
 import { AuxRequestsProvider } from "../context/api-context/auxRequests";
 import Sidebar from "../components/nav/sidebar";
 import { usePathname } from "next/navigation";
@@ -28,8 +29,10 @@ export default function RootLayout({
             <NotesProvider>
               <TasksProvider>
                 <ProjectsProvider>
-                  {!sidebarExcludedRoutes.includes(pathname) && <Sidebar />}
-                  {children}
+                  <RemindersProvider>
+                    {!sidebarExcludedRoutes.includes(pathname) && <Sidebar />}
+                    {children}
+                  </RemindersProvider>
                 </ProjectsProvider>
               </TasksProvider>
             </NotesProvider>

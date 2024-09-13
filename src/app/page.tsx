@@ -85,7 +85,7 @@ export default function Home() {
         </form>
 
         <div className="note-of-warning-div">
-          <p className="note-of-warning">NOTE: For the best experience, I suggest viewing on Chrome.</p>
+          <p className="note-of-warning">NOTE: For the best experience, I suggest using on Desktop.</p>
         </div>
         
       </div>

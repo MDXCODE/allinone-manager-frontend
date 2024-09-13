@@ -1,19 +1,45 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useNotes } from "../../context/page-context/notesContext";
 import EditNotePopupForm from "../../components/forms/notes-page-popups/editNotesPopupForm";
 import AddNotePopupForm from "../../components/forms/notes-page-popups/addNotesPopupForm";
 import "../../css/pages-css/notes.css";
-import { Note } from "../../context/page-context/notesContext";
+import { Note, useNotes } from "../../context/page-context/notesContext";
 
 const NotesPage = () => {
   const { push } = useRouter();
+  const { getUserNotes, homeSelectedNote, setHomeSelectedNote, handleNoteUpdates, deleteNote, notes, setNotes } = useNotes();
   const searchParams = useSearchParams();
-  const { homeSelectedNote, setHomeSelectedNote, notes, handleNoteUpdates, deleteNote } = useNotes();
   const [isEditNotePopupOpen, setIsEditNotePopupOpen] = useState(false);
   const [isAddNotePopupOpen, setIsAddNotePopupOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchNotes = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const fetchedNotes = await getUserNotes();
+      if (fetchedNotes) {
+        setNotes(fetchedNotes);
+      } else {
+        setNotes([]);
+      }
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(e.message);
+      } else {
+        setError("An unknown error occurred");
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [getUserNotes, setNotes]);
+
+  useEffect(() => {
+    fetchNotes();
+  }, [fetchNotes]);
 
   useEffect(() => {
     if (homeSelectedNote) {
@@ -60,18 +86,55 @@ const NotesPage = () => {
   const handleDeleteNote = async (noteId: string) => {
     try {
       await deleteNote(noteId);
-      handleNoteUpdates();  // Refresh notes after deletion
+      await fetchNotes(); 
     } catch (e) {
       console.error("Failed to delete note", e);
     }
   };
 
-  if (!notes) {
+  if (loading) {
     return <div>Loading notes...</div>;
+  }
+
+  if (error) {
+    return <div>Error loading notes: {error}</div>;
+  }
+
+  if (!notes || notes.length === 0) {
+    return (
+      <div className="main-notes-page-container">
+        <title>Notes</title>
+        <div className="notes-page-titles">
+          <h2 className="notes-page-titles-main-title">Notes</h2>
+          <h4 className="notes-page-titles-sub-title">The AllInOne User Notes Page</h4>
+        </div>
+        <div className="notes-page-content">
+          <div className="all-notes-container-box">
+            <div className="all-notes-container-title">
+              <div>
+                <h3>All Notes</h3>
+              </div>
+              <button onClick={() => setIsAddNotePopupOpen(true)} className="add-note-button">
+                Add Note
+              </button>
+            </div>
+            <div className="add-notes-top-border"></div>
+            <div className="add-notes-top-separator"></div>
+            <div className="no-notes-avail">No notes available.</div>
+          </div>
+        </div>
+        <AddNotePopupForm
+          isOpen={isAddNotePopupOpen}
+          onClose={() => setIsAddNotePopupOpen(false)}
+          onNoteAdded={fetchNotes}
+        />
+      </div>
+    );
   }
 
   return (
     <div className="main-notes-page-container">
+      <title>Notes</title>
       <div className="notes-page-titles">
         <h2 className="notes-page-titles-main-title">Notes</h2>
         <h4 className="notes-page-titles-sub-title">The AllInOne User Notes Page</h4>
@@ -116,7 +179,7 @@ const NotesPage = () => {
       <AddNotePopupForm
         isOpen={isAddNotePopupOpen}
         onClose={() => setIsAddNotePopupOpen(false)}
-        onNoteAdded={handleNoteUpdates}
+        onNoteAdded={fetchNotes}
       />
 
       {homeSelectedNote && (
@@ -126,7 +189,7 @@ const NotesPage = () => {
             setIsEditNotePopupOpen(false);
             setHomeSelectedNote(null);
           }}
-          onNoteUpdated={handleNoteUpdates}
+          onNoteUpdated={fetchNotes}
           note={homeSelectedNote}
         />
       )}

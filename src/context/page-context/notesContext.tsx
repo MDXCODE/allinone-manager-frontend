@@ -30,6 +30,7 @@ type NotesContextType = {
   getUserNotes: () => Promise<Note[] | null>;
   errorNotes: string | null;
   loadingNotes: boolean;
+  setNotes: React.Dispatch<React.SetStateAction<Note[]>>; 
 };
 
 const NotesContext = createContext<NotesContextType | undefined>(undefined);
@@ -188,6 +189,7 @@ export const NotesProvider: React.FC<{ children: React.ReactNode }> = ({
         homeSelectedNote,
         setHomeSelectedNote,
         notes,
+        setNotes,
         fetchUserNotes,
         handleNoteUpdates,
         deleteNote,

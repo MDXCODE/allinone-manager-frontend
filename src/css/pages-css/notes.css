@@ -24,6 +24,10 @@ body {
     margin-top: -13px;
 }
 
+.no-notes-avail {
+    padding-left: 23px;
+}
+
 .notes-page-titles-main-title {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;

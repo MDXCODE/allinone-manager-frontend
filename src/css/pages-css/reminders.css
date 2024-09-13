@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;700;800;900&display=swap');
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+
+body {
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    color: #eee;
+}
+
+.main-reminders-page-container {
+    margin-left: 280px;
+    padding: 10px;
+}
+
+.reminders-page-titles {
+    margin-top: -13px;
+}
+
+.reminders-page-titles-main-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 27px;
+    color: #FFF733;
+    margin-bottom: 4px;
+}
+
+.reminders-page-titles-sub-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
+    margin-top: 0;
+}
+
+.dashboard-page-content {
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+  }
+
+.all-reminders-container-box {
+    background-image: linear-gradient(#0D0C27, #2D2B8D);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    height: 82vh;
+    width: 42vw;
+    min-height: 300px;
+    min-width: 300px;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+.add-reminder-button {
+    margin: 10px 0;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.all-reminders-container-title {
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    padding-left: 21px;
+    padding-right: 21px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-reminders-top-border {
+    background-color: rgb(201, 201, 201);
+    width: 95%;
+    height: 2px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.add-reminders-top-separator {
+    padding-bottom: 20px;
+}
+
+.individual-reminder-card {
+    padding: 2px 10px;
+    border: 3px solid white;
+    border-radius: 10px;
+    color: white;
+    width: 450px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow: hidden;
+}
+
+.individual-reminder-card-titles{
+    padding-left: 20px;
+    padding-bottom: 45px;
+}
+
+.reminders-individual-time {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 50px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+.reminders-individual-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    margin-left: 5px;
+    line-height: 1;
+}

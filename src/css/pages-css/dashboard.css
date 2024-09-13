@@ -3,6 +3,8 @@
 html,
 body {
     height: 100%;
+    max-height: 1080px;
+    max-width: 1920px;
     margin: 0;
 }
 
@@ -15,14 +17,18 @@ body {
     color: #eee;
 }
 
-p, h1, h2, h3, h4 {
+p,
+h1,
+h2,
+h3,
+h4 {
     font-family: 'Open Sans', sans-serif;
 }
 
 .main-dashboard-page-container {
     margin-left: 275px;
     margin-right: 40px;
-    padding: 20px;
+    padding: 1px;
 }
 
 
@@ -41,45 +47,45 @@ p, h1, h2, h3, h4 {
 }
 
 .dashboard-elements-full-container {
-    padding: 10px;
+    /*padding-bottom: 10px;*/
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .dashboard-elements-full-container-layer-one {
+    padding-top: 35px;
+    transform: translateY(-25px);
     display: flex;
+    justify-content: space-between;
+    gap: 10px;
 }
 
-.dashboard-intro-paragraph-container {
-    width: 650px;
-    padding-right: 55px;
+.project-card {
+    background-image: linear-gradient(#0D0C27, #2D2B8D);
+    background-repeat: no-repeat;
+    height: 110px;
+    width: 400px;
+    border-radius: 15px;
 }
 
-.dashboard-intro-paragraph-title {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 700;
-    padding: 0;
-    margin: 0;
-    padding-bottom: 10px;
-}
 
-.dashboard-intro-paragraph-content {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 200;
-    padding: 0;
-    margin: 0;
+.dashboard-elements-full-container-layer-two {
+    display: flex;
+    justify-content: space-between;
 }
 
 .current-notes-container {
     background-color: #F1F1F1;
-    width: 340px;
-    height: 305px;
+    width: 370px;
+    height: 315px;
     border-radius: 10px;
     color: black;
 }
 
 .current-notes-container-header {
     padding: 0px;
-    padding-left: 23px;
-    padding-right: 23px;
+    padding-left: 32px;
+    padding-right: 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -90,11 +96,12 @@ p, h1, h2, h3, h4 {
     font-weight: 300;
     font-size: 15px;
     color: #3B86F8;
+    border: none;
 }
 
 .view-all-text:hover {
-    font-weight:bold;
-    transform:translateX(2px)
+    font-weight: bold;
+    transform: translateX(2px)
 }
 
 .current-notes-inner-container {
@@ -103,15 +110,14 @@ p, h1, h2, h3, h4 {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 4px;
-    
+    gap: 10px;
 }
 
 .note-card {
     padding-left: 15px;
     display: flex;
-    align-items: center; 
-    text-align:left; 
+    align-items: center;
+    text-align: left;
     border-radius: 10px;
     background-color: #FFFFFF;
     border: 2px solid #EBEBEB;
@@ -125,4 +131,251 @@ p, h1, h2, h3, h4 {
 
 .note-card-text {
     padding-left: 10px;
+}
+
+
+.current-reminders-container {
+    background-color: #F1F1F1;
+    width: 370px;
+    height: 315px;
+    border-radius: 10px;
+    color: black;
+}
+
+.current-reminders-container-header {
+    padding: 0px;
+    padding-left: 23px;
+    padding-right: 23px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.current-reminders-inner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+
+.reminder-card {
+    padding-left: 15px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    border: 2px solid #EBEBEB;
+    width: 290px;
+    height: 70px;
+}
+
+.reminder-card-text {
+    margin-left: 10px;
+}
+.reminder-card-subtext-one {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+.reminder-card-subtext-two {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
+    font-size: 13px;
+    padding-left: 1px;
+    margin: 0;
+    line-height: 1;
+}
+
+
+.current-tasks-container {
+    background-color: #F1F1F1;
+    width: 720px;
+    height: 315px;
+    border-radius: 10px;
+    color: black;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.current-tasks-container-header {
+    padding: 0px;
+    padding-left: 23px;
+    padding-right: 23px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.current-tasks-inner-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 35px;
+    width: 100%;
+    max-width: 690px;
+    padding-left: 23px;
+    padding-right: 23px;
+}
+
+.task-card {
+    padding-left: 15px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    border: 2px solid #EBEBEB;
+    width: 290px;
+    height: 70px;
+}
+
+.task-card-text {
+    padding-left: 10px;
+    margin-top: 5px;
+}
+
+.task-title-name {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+}
+
+.task-project-name {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+.task-card:hover {
+    transform: scale(1.05);
+}
+
+
+
+.dashboard-elements-full-container-layer-three {
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.weekly-activity-container {
+    background-color: #F1F1F1;
+    width: 610px;
+    height: 315px;
+    border-radius: 10px;
+    color: black;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.weekly-activity-container-header {
+    padding: 0px;
+    padding-left: 28px;
+    padding-right: 28px;
+}
+
+.weekly-activity-inner-container {
+    padding-left: 28px;
+    padding-right: 28px;
+}
+
+.weekly-activity-card {
+    display: flex;
+    align-items: flex-end; /* Ensures the bars start at the bottom */
+    text-align: left;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    border: 2px solid #EBEBEB;
+    width: 550px;
+    height: 235px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    overflow: hidden;
+}
+
+.sun-graphic,
+.mon-graphic,
+.tues-graphic,
+.wed-graphic,
+.thur-graphic,
+.fri-graphic,
+.sat-graphic {
+    background-image: linear-gradient(#0D0C27, #2D2B8D);
+    background-repeat: no-repeat;
+    width: 80px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 10px;
+    font-size: 16px;
+    position: relative;
+    height: 0; 
+    transition: height 0.3s ease; 
+}
+
+.sun-graphic::after,
+.mon-graphic::after,
+.tues-graphic::after,
+.wed-graphic::after,
+.thur-graphic::after,
+.fri-graphic::after,
+.sat-graphic::after {
+    content: attr(data-day);
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    color: white;
+}
+
+.quick-notes-container {
+    background-color: #F1F1F1;
+    width: 880px;
+    height: 315px;
+    border-radius: 10px;
+    color: black;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.quick-notes-container-header {
+    padding: 0px;
+    padding-left: 28px;
+    padding-right: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quick-notes-inner-container {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.quick-notes-card {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    border: 2px solid #EBEBEB;
+    width: 825px;
+    height: 235px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+.quick-notes-card:focus {
+    outline: none;
 }
