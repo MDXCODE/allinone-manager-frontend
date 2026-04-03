@@ -166,6 +166,9 @@ body {
 
 .task-item:hover {
     transform: scale(1.01);
+    background-color: rgb(87, 87, 87, 0.2);
+    border-radius: 20px;
+    height: 60px;   
 }
 
 

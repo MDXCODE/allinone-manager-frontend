@@ -108,7 +108,7 @@ const RemindersPage = () => {
                   <div
                     key={reminder.reminder_id}
                     onClick={() => handleEditReminder(reminder)}
-                    className="individual=reminder-card"
+                    className="individual-reminder-card"
                   >
                     <div className="individual-reminder-card-titles">
                       <p className="reminders-individual-time">

@@ -84,6 +84,8 @@ body {
     transition: border 0.3s;
     transform: scale(1.05);
     transform: rotate(0.5deg);
+    background-color: rgb(87, 87, 87, 0.2);
+    border-radius: 20px;
 }
 
 

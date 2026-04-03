@@ -57,6 +57,7 @@ body {
     max-height: 100%;
     border-radius: 10px;
     overflow-y: auto;
+    overflow-x:hidden;
 }
 
 .add-reminder-button {
@@ -92,13 +93,19 @@ body {
 
 .individual-reminder-card {
     padding: 2px 10px;
-    border: 3px solid white;
     border-radius: 10px;
     color: white;
     width: 450px;
     max-height: 300px;
-    overflow-y: auto;
     overflow: hidden;
+}
+
+.individual-reminder-card:hover {
+    transform: scale(1.01);
+    background-color: rgb(87, 87, 87, 0.2);
+    border-radius: 20px;
+    width: 100%;
+    overflow-x:hidden;
 }
 
 .individual-reminder-card-titles{

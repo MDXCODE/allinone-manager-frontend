@@ -10,12 +10,21 @@ export interface Project {
   is_completed: boolean;
 }
 
+interface ProjectTaskStats {
+  project_id: string;
+  project_name: string;
+  completedTasksCount: number;
+  totalTasksCount: number;
+}
+
 type ProjectsContextType = {
     getUserProjects: () => Promise<Project[] | null>;
     addNewProject: (projectName: string, projectDesc: string, projectDueDate: string) => Promise<any | null>;
     deleteProject: (projectId: string) => Promise<any | null>;
     loadingProjects: boolean;
     errorProjects: string | null;
+    projectTaskStats: ProjectTaskStats[];
+    setProjectTaskStats: React.Dispatch<React.SetStateAction<ProjectTaskStats[]>>;
 }
 
 const ProjectsContext = createContext<ProjectsContextType | undefined>(undefined);
@@ -27,7 +36,8 @@ export const ProjectsProvider: React.FC<{ children: React.ReactNode }> = ({
 
     const [loadingProjects, setLoadingProjects] = useState<boolean>(false);
     const [errorProjects, setErrorProjects] = useState<string | null>(null);
-  
+    const [projectTaskStats, setProjectTaskStats] = useState<ProjectTaskStats[]>([]);
+
     const getUserProjects = useCallback(async (): Promise<Project[] | null> => {
       setLoadingProjects(true);
       setErrorProjects(null);
@@ -118,7 +128,7 @@ export const ProjectsProvider: React.FC<{ children: React.ReactNode }> = ({
     return (
         <ProjectsContext.Provider
           value={{
-            addNewProject, deleteProject, getUserProjects, loadingProjects, errorProjects
+            projectTaskStats, setProjectTaskStats, addNewProject, deleteProject, getUserProjects, loadingProjects, errorProjects
           }}
         >
           {children}

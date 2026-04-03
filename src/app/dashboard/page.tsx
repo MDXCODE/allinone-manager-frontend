@@ -15,6 +15,7 @@ import {
 import {
   Project,
   useProjects,
+  
 } from "../../context/page-context/projectContext";
 import "../../css/pages-css/dashboard.css";
 import notesIcon from "../../images/dashboard-images/transparentNotesIcon.svg";
@@ -28,9 +29,19 @@ const Dashboard = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [completedTasks, setCompletedTasks] = useState<CompletedTask[]>([]);
 
-  const { getUserProjects } = useProjects();
+  const { getUserProjects, projectTaskStats, setProjectTaskStats } = useProjects();
   const [projects, setProjects] = useState<Project[]>([]);
   const [projectMap, setProjectMap] = useState<Map<string, string>>(new Map());
+  
+
+  useEffect(() => {
+    const fetchProjectTaskStats = async () => {
+      const stats = await calculateCompletedTasksPerProject();
+      setProjectTaskStats(stats);
+    };
+
+    fetchProjectTaskStats();
+  }, []);
 
   const { getUserNotes, addNewNote } = useNotes();
   const [notes, setNotes] = useState<Note[]>([]);
@@ -138,6 +149,7 @@ const Dashboard = () => {
       }
     }
   };
+
 
   const handleNoteClick = async (noteId: string) => {
     const note = notes.find((n) => n.note_id === noteId);
@@ -247,6 +259,34 @@ const Dashboard = () => {
     fetchProjects();
   }, [user, getUserProjects]);
 
+  
+  const calculateCompletedTasksPerProject = async () => {
+    const projects = await getUserProjects();
+    const completedTasks = await getCompletedUserTasks();
+    const tasks = await getUserTasks();
+  
+    if (!projects || !tasks || !completedTasks) {
+      return [];
+    }
+
+    const projectTaskStats = projects.map((project) => {
+      const tasksForProject = tasks.filter(task => task.project_id === project.project_id);
+      
+      const completedTasksForProject = completedTasks.filter(task => task.project_id === project.project_id);
+  
+      return {
+        project_id: project.project_id,
+        project_name: project.project_name,
+        completedTasksCount: completedTasksForProject.length, 
+        totalTasksCount: tasksForProject.length 
+      };
+    });
+  
+    return projectTaskStats;
+  };
+  
+  
+
   useEffect(() => {
     const fetchNotes = async () => {
       if (user) {
@@ -312,9 +352,16 @@ const Dashboard = () => {
 
       <div className="dashboard-elements-full-container">
         <div className="dashboard-elements-full-container-layer-one">
-          <div className="project-card"></div>
-          <div className="project-card"></div>
-          <div className="project-card"></div>
+       
+            {projectTaskStats.slice(0, 3).map((project) => (
+              <div key={project.project_id} className="project-card">
+                <h2>{project.project_name}</h2>
+                <div className="project-card-inner-flex">
+                  <p className="completed-tasks">{`${project.completedTasksCount}/${project.totalTasksCount}`}</p>
+                </div>
+              </div>
+            ))}
+          
         </div>
 
         <div className="dashboard-elements-full-container-layer-two">
@@ -384,7 +431,7 @@ const Dashboard = () => {
               </p>
             </div>
             <div className="current-reminders-inner-container">
-            {reminders.map((reminder) => (
+              {reminders.map((reminder) => (
                 <div
                   key={reminder.reminder_id}
                   className="reminder-card"
@@ -397,8 +444,12 @@ const Dashboard = () => {
                     height={30}
                   />
                   <div className="reminder-card-text">
-                  <p className="reminder-card-subtext-one">{formatDateTime(reminder.reminder_datetime)}</p>
-                  <p className="reminder-card-subtext-two">{reminder.reminder_name}</p>
+                    <p className="reminder-card-subtext-one">
+                      {formatDateTime(reminder.reminder_datetime)}
+                    </p>
+                    <p className="reminder-card-subtext-two">
+                      {reminder.reminder_name}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -410,7 +461,7 @@ const Dashboard = () => {
           <div className="weekly-activity-container">
             <div>
               <div className="weekly-activity-container-header">
-                <p>Weekly Activity</p>
+                <p>Weekly Productivity Comparison</p>
               </div>
 
               <div className="weekly-activity-inner-container">

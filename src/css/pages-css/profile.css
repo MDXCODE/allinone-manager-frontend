@@ -38,111 +38,90 @@ body {
 
 .profile-page {
   padding: 10px;
-  display: flex;             
-  flex-wrap: wrap;            
-  justify-content: flex-start; 
-  gap: 0px;                   
-  column-gap: 250px;           
-  width: 100%;                
+  display: flex;    
+  background-image: linear-gradient(#0D0C27, #2D2B8D);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 770px;     
 }
 
-
-
-/*-------------------------------------------------------*/
-
-.profile-summary-container {
-  font-family: 'Open Sans', sans-serif;
-  padding-left: 20px;
-  border: 10px solid white; 
-  width: 550px;
-}
 
 
 /*-------------------------------------------------------*/
 
 .profile-image-container {
-  background-color: black;
-  border: 10px solid white; 
-  width: 550px;
-}
-
-.profile-image-title {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 500; 
-  margin-left: 20px;
-  padding-bottom: 20px;
-  position: absolute;
-}
-
-.profile-image-input-container {
-  display: flex; 
-  align-items: center; 
-  padding-top: 80px;
-  padding-left: 20px;
+  background-color: white;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  overflow: visible; 
 }
 
 .profile-image-input-container-image {
-  border-radius: 50%;
+  top: 50%;
+  left: 20px;
+  transform: translate(50px, 45%);
+  margin-left: 50px;
   width: 190px; 
   height: auto;
-  margin-right: 20px; 
+  border-radius: 50%;
+  border: 5px solid white;
+  margin: 0; 
+}
+/*-------------------------------------------------------*/
+
+.user-details-twodisplay-container {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 60px;
+  padding-right: 60px;
 }
 
-.profile-image-input-container-buttons {
-  display: flex;          
-  flex-direction: column; 
-  align-items: flex-start; 
-  gap: 15px;      
-  margin-top:50px;
-  margin-left: 20px; 
-}
-
-.change-photo-button {
-  background-color: #1B1954;
-  width: 130px;
-  height: 40px;
-  color: white;
-  border-radius: 10px;
-  border: none;   
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
-}
-
-.remove-button {
-  width: 130px;
-  height: 40px;
-  border-radius: 10px;
-  border: none;      
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 700;
-}
-
-.change-photo-button:hover {
-  color: #FFF733; 
-  border: 1px solid #FFF733; 
-}
-
-.remove-button:hover {
-  background-color: #FFF733; 
-  color: black; 
-}
-
-.profile-image-input-recommended-text {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 200; 
-  margin-top: 20px;
-  margin-left: 20px; 
-}
 
 /*-------------------------------------------------------*/
 
+/*-------------------------------------------------------*/
+
+.user-details-display-container {
+
+}
+
+.user-name{
+  margin: 0;
+  padding:0;
+  font-size: 90px;
+}
+
+.first-and-last {
+  margin:0;
+  padding:0;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400; 
+  margin-left: 10px;
+}
+
+.email {
+  margin:0;
+  padding:0;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400; 
+  margin-left: 10px;
+  padding-bottom: 15px;
+}
+
+/*-------------------------------------------------------*/
+.hidden {
+  display: none;
+}
 
 .profile-user-details-container {
-  background-color: black;
-  border: 10px solid white; 
-  width: 550px;
+  background-image: linear-gradient(#0D0C27, #2D2B8D);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
   padding-top: 0px;
-  padding-left: 20px;
 }
 
 .profile-user-details-titles {
@@ -242,7 +221,8 @@ input:read-only {
   border: none;      
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
-  background-color: #FFFFFF
+  background-color: #FFFFFF;
+  margin-left: 10px;
 }
 
 

@@ -2,15 +2,48 @@
 
 import React, { createContext, useContext, useState, useCallback } from 'react';
 
+interface User {
+  user_name: string;
+  user_email: string;
+  user_first_name: string;
+  user_last_name: string;
+}
+
 interface AuxRequestsContextType {
   updateUserDetails: (username: string, firstname: string, lastname: string, email: string) => Promise<any | null>;
+  fetchUserData: () => Promise<User | null>;
   errorUser: string | null;
+  userDetails: User | null;
 }
 
 const AuxRequestsContext = createContext<AuxRequestsContextType | undefined>(undefined);
 
 export const AuxRequestsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [errorUser, setErrorUser] = useState<string | null>(null);
+  const [userDetails, setUserDetails] = useState<User | null>(null);
+  const [userDetailsError, setUserDetailsError] = useState<string | null>(null);
+
+  const fetchUserData = async (): Promise<User | null> => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL_ENV}/users/details`, {
+        method: 'GET',
+        credentials: 'include',
+      });
+  
+      if (res.ok) {
+        const data = await res.json();
+        setUserDetails(data.data);
+        return data.data; 
+      } else {
+        const errorText = await res.text();
+        setUserDetailsError(`Failed to fetch user details: ${errorText}`);
+        return null;
+      }
+    } catch (error) {
+      setUserDetailsError(`Error fetching user data: ${error}`);
+      return null; 
+    }
+  };
 
   const updateUserDetails = async (username: string, firstname: string, lastname: string, email: string) => {
      try {
@@ -43,7 +76,7 @@ export const AuxRequestsProvider: React.FC<{ children: React.ReactNode }> = ({ c
   };
 
   return (
-    <AuxRequestsContext.Provider value={{ updateUserDetails, errorUser }}>
+    <AuxRequestsContext.Provider value={{ userDetails, fetchUserData, updateUserDetails, errorUser }}>
       {children}
     </AuxRequestsContext.Provider>
   );
